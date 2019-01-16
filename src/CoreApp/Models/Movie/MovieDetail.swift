@@ -12,6 +12,7 @@ struct MovieDetail: Encodable {
     let id: Int
     let title: String
     let overview: String
+    let image: String?
 }
 
 extension MovieDetail: Decodable {
@@ -19,6 +20,7 @@ extension MovieDetail: Decodable {
         case id
         case title
         case overview
+        case image = "poster_path"
     }
     
     init(from decoder: Decoder) throws {
@@ -27,5 +29,6 @@ extension MovieDetail: Decodable {
         id = try container.decode(Int.self, forKey: .id)
         title = try container.decode(String.self, forKey: .title)
         overview = try container.decode(String.self, forKey: .overview)
+        image = try container.decode(String.self, forKey: .image)
     }
 }

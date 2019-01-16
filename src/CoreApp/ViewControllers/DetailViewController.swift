@@ -8,10 +8,12 @@
 
 import UIKit
 import Swinject
+import AlamofireImage
 
 class DetailViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var overviewLabel: UILabel!
+    @IBOutlet weak var movieImageView: UIImageView!
     
     lazy var movieApi : MovieNetworking = container.resolve(MovieNetworking.self)!    
     public var selectedId: Int?
@@ -28,8 +30,14 @@ class DetailViewController: UIViewController {
             if let movie = result {
                 self.titleLabel.text = movie.title
                 self.overviewLabel.text = movie.overview
+                
+                if let poster = movie.image, !poster.isEmpty {
+                    let imageUrl = "http://image.tmdb.org/t/p/w185_and_h278_bestv2\(poster)"
+                    self.movieImageView.af_setImage(withURL: URL.init(string: imageUrl)!)
+                    self.movieImageView.contentMode = .scaleAspectFit
+                }
             }
         }
-       
     }
+    
 }

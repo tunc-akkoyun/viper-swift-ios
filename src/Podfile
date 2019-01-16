@@ -9,6 +9,7 @@ target 'CoreApp' do
 
 pod 'Moya'
 pod 'Swinject'
+pod 'AlamofireImage'
 pod 'SVProgressHUD'
 
 end
